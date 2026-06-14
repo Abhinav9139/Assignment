@@ -31,8 +31,7 @@ function App() {
         className={`login-card ${isVisible ? 'login-card--visible' : ''}`}
         aria-label="Login section"
       >
-        {/* Pass background URL so left panel can mirror it seamlessly */}
-        <LeftPanel backgroundUrl={backgroundImage} />
+        <LeftPanel />
         <RightPanel />
       </section>
     </main>

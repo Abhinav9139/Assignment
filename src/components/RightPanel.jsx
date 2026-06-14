@@ -1,4 +1,5 @@
 import LoginForm from './LoginForm';
+import logoImage from '../assets/logo.png';
 
 /**
  * RightPanel — Contains the logo, welcome text, login form,
@@ -10,7 +11,7 @@ function RightPanel() {
       {/* Brand logo */}
       <div className="right-panel__logo">
         <span className="logo__icon" aria-hidden="true">
-          <span className="logo__icon-dot" />
+          <img src={logoImage} alt="Cogie Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </span>
         <span className="logo__text">Cogie</span>
       </div>

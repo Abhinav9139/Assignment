@@ -27,10 +27,10 @@
   --color-success-bg: #f0fdf4;
 
   --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-md: 8px;
   --radius-lg: 34px;
   --radius-panel: 24px;
-  --radius-btn: 12px;
+  --radius-btn: 8px;
 
   --shadow-card: 0 25px 80px rgba(0, 0, 0, 0.45),
                  0 10px 30px rgba(0, 0, 0, 0.25);
@@ -70,9 +70,9 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   min-height: 100vh;
-  padding: 8px 0 8px 8px;
+  padding: 16px;
 }
 
 /* Single continuous background artwork */
@@ -100,9 +100,10 @@ body {
   position: relative;
   z-index: 2;
   display: flex;
-  width: 100%;
-  min-height: calc(100vh - 16px);
-  background: var(--color-white);
+  width: 95%;
+  max-width: 1350px;
+  min-height: 660px;
+  background: transparent;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
@@ -126,7 +127,22 @@ body {
 .left-panel {
   position: relative;
   flex: 0 0 47%;
-  padding: 6px;
+  box-sizing: border-box;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* The transparent cutout window that forms the frame */
+.left-panel__window {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  border-radius: var(--radius-panel);
+  box-shadow: 0 0 0 9999px var(--color-white);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Glass window — same BG as page via fixed attachment */
@@ -145,7 +161,11 @@ body {
 /* Dark translucent overlay */
 .left-panel__glass-overlay {
   position: absolute;
-  inset: 0;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  border-radius: var(--radius-panel);
   z-index: 1;
   background: linear-gradient(
     to bottom,
@@ -163,7 +183,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  padding: 28px 30px;
+  padding: 48px;
+  color: var(--color-white);
 }
 
 /* Top quote */
@@ -224,31 +245,24 @@ body {
   align-items: center;
   padding: 24px 40px 28px;
   overflow-y: auto;
+  background: var(--color-white);
 }
 
 /* Logo */
 .right-panel__logo {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   margin-bottom: 32px;
 }
 
 .logo__icon {
   width: 24px;
   height: 24px;
-  background: var(--color-black);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.logo__icon-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-white);
-  border-radius: 50%;
+  color: var(--color-black);
 }
 
 .logo__text {
@@ -306,7 +320,7 @@ body {
   position: relative;
 }
 
-/* Inputs — 44px height, 1px border to match mockup */
+/* Inputs — light background, borderless */
 .form-group__input {
   width: 100%;
   height: 44px;
@@ -314,12 +328,12 @@ body {
   font-family: var(--font-body);
   font-size: 0.84rem;
   color: var(--color-gray-800);
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
-  border-radius: 7px;
+  background: #f4f6f8;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
   outline: none;
   transition: border-color var(--transition-fast),
-              box-shadow var(--transition-fast);
+              background var(--transition-fast);
 }
 
 .form-group__input::placeholder {
@@ -329,8 +343,8 @@ body {
 
 /* Focus */
 .form-group__input:focus {
-  border-color: var(--color-black);
-  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.06);
+  background: var(--color-white);
+  border-color: var(--color-gray-300);
 }
 
 /* Error */
@@ -621,8 +635,8 @@ body {
    --------------------------- */
 @media (max-width: 768px) {
   .login-page {
-    padding: 8px;
-    align-items: flex-start;
+    padding: 24px;
+    align-items: center;
     justify-content: center;
   }
 
