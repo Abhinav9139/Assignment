@@ -1,0 +1,728 @@
+/* ============================================
+   App.css — Complete stylesheet for Login Page
+   Pixel-perfect match to reference mockup
+   ============================================ */
+
+/* ---------------------------
+   CSS Custom Properties
+   --------------------------- */
+:root {
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --color-white: #ffffff;
+  --color-black: #111111;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-error: #dc2626;
+  --color-error-bg: #fef2f2;
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 34px;
+  --radius-panel: 24px;
+  --radius-btn: 12px;
+
+  --shadow-card: 0 25px 80px rgba(0, 0, 0, 0.45),
+                 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+}
+
+/* ---------------------------
+   Reset & Base
+   --------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-gray-800);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---------------------------
+   Login Page — Full Screen
+   --------------------------- */
+.login-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 100vh;
+  padding: 8px 0 8px 8px;
+}
+
+/* Single continuous background artwork */
+.login-page__background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Dark overlay */
+.login-page__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------------------
+   Login Card
+   --------------------------- */
+.login-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 16px);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+
+  /* Fade-in */
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login-card--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ---------------------------
+   Left Panel — Glass Window
+   White card padding = white border frame
+   --------------------------- */
+.left-panel {
+  position: relative;
+  flex: 0 0 47%;
+  padding: 6px;
+}
+
+/* Glass window — same BG as page via fixed attachment */
+.left-panel__glass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Dark translucent overlay */
+.left-panel__glass-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 35%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+/* Foreground content */
+.left-panel__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 28px 30px;
+}
+
+/* Top quote */
+.left-panel__quote {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.left-panel__quote-text {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-white);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.left-panel__quote-line {
+  flex: 1;
+  max-width: 90px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Bottom heading block */
+.left-panel__bottom {
+  margin-top: auto;
+  padding-bottom: 2px;
+}
+
+.left-panel__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--color-white);
+  line-height: 1.05;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+
+.left-panel__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
+  max-width: 320px;
+}
+
+/* ---------------------------
+   Right Panel — 53% width, denser layout
+   --------------------------- */
+.right-panel {
+  flex: 0 0 53%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 40px 28px;
+  overflow-y: auto;
+}
+
+/* Logo */
+.right-panel__logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 32px;
+}
+
+.logo__icon {
+  width: 24px;
+  height: 24px;
+  background: var(--color-black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo__icon-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-white);
+  border-radius: 50%;
+}
+
+.logo__text {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+/* Welcome section — full width to match wider form */
+.right-panel__welcome {
+  text-align: center;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.right-panel__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.6vw, 2rem);
+  font-weight: 600;
+  color: var(--color-black);
+  margin-bottom: 6px;
+}
+
+.right-panel__description {
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+  line-height: 1.45;
+}
+
+/* ---------------------------
+   Login Form — wider to fill right panel
+   --------------------------- */
+.login-form {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group__label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+  margin-bottom: 5px;
+}
+
+/* Input wrapper */
+.form-group__input-wrapper {
+  position: relative;
+}
+
+/* Inputs — 44px height, 1px border to match mockup */
+.form-group__input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  color: var(--color-gray-800);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 7px;
+  outline: none;
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.form-group__input::placeholder {
+  color: var(--color-gray-400);
+  font-size: 0.82rem;
+}
+
+/* Focus */
+.form-group__input:focus {
+  border-color: var(--color-black);
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.06);
+}
+
+/* Error */
+.form-group__input--error {
+  border-color: var(--color-error);
+}
+
+.form-group__input--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+/* Password right padding for toggle */
+.form-group__input--password {
+  padding-right: 44px;
+}
+
+/* Password toggle */
+.form-group__toggle {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-gray-400);
+  border-radius: 6px;
+  transition: color var(--transition-fast),
+              background var(--transition-fast);
+}
+
+.form-group__toggle:hover {
+  color: var(--color-gray-600);
+  background: var(--color-gray-50);
+}
+
+.form-group__toggle:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
+/* Error message */
+.form-group__error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 0.78rem;
+  color: var(--color-error);
+}
+
+/* ---------------------------
+   Remember / Forgot Row
+   --------------------------- */
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.form-options__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--color-gray-600);
+  user-select: none;
+}
+
+.form-options__checkbox input[type='checkbox'] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--color-black);
+  cursor: pointer;
+}
+
+.form-options__forgot {
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.form-options__forgot:hover {
+  color: var(--color-black);
+}
+
+.form-options__forgot:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------------------------
+   Buttons
+   --------------------------- */
+
+/* Sign In — pill shape matching mockup */
+.btn-signin {
+  width: 100%;
+  height: 46px;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-white);
+  background: var(--color-black);
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              opacity var(--transition-fast);
+}
+
+.btn-signin:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-signin:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-signin:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.btn-signin:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.btn-signin__spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Google button — light border, compact */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 44px;
+  margin-top: 12px;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+              background var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+.btn-google:hover {
+  background: var(--color-gray-50);
+  border-color: var(--color-gray-300);
+  transform: translateY(-1px);
+}
+
+.btn-google:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.btn-google__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Divider — hidden but kept in CSS in case needed */
+.form-divider {
+  display: none;
+}
+
+/* ---------------------------
+   Footer
+   --------------------------- */
+.right-panel__footer {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 0.82rem;
+  color: var(--color-gray-500);
+  text-align: center;
+}
+
+.right-panel__footer a {
+  color: var(--color-black);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.right-panel__footer a:hover {
+  text-decoration: underline;
+}
+
+.right-panel__footer a:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------------------------
+   Success Toast
+   --------------------------- */
+.success-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-sm);
+  color: var(--color-success);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------------------------
+   Responsive — Tablet
+   --------------------------- */
+@media (max-width: 1024px) {
+  .left-panel {
+    flex: 0 0 43%;
+  }
+
+  .right-panel {
+    flex: 0 0 57%;
+    padding: 24px 28px;
+  }
+
+  .left-panel__heading {
+    font-size: clamp(1.75rem, 3.6vw, 2.4rem);
+  }
+}
+
+/* ---------------------------
+   Responsive — Mobile
+   --------------------------- */
+@media (max-width: 768px) {
+  .login-page {
+    padding: 8px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .login-card {
+    flex-direction: column;
+    width: 100%;
+    min-height: auto;
+    border-radius: 24px;
+  }
+
+  .left-panel {
+    flex: none;
+    min-height: 280px;
+    padding: 6px;
+  }
+
+  .left-panel__glass {
+    border-radius: 20px;
+  }
+
+  .left-panel__content {
+    padding: 22px;
+  }
+
+  .right-panel {
+    flex: none;
+    padding: 24px 22px;
+  }
+
+  .right-panel__logo {
+    margin-bottom: 18px;
+  }
+
+  .right-panel__welcome {
+    margin-bottom: 18px;
+  }
+
+  .left-panel__heading {
+    font-size: 1.9rem;
+  }
+}
+
+/* ---------------------------
+   Responsive — Small Mobile
+   --------------------------- */
+@media (max-width: 480px) {
+  .login-page {
+    padding: 8px;
+  }
+
+  .login-card {
+    border-radius: 20px;
+  }
+
+  .left-panel {
+    min-height: 220px;
+    padding: 5px;
+  }
+
+  .left-panel__glass {
+    border-radius: 16px;
+  }
+
+  .left-panel__content {
+    padding: 18px;
+  }
+
+  .left-panel__heading {
+    font-size: 1.65rem;
+  }
+
+  .left-panel__subtitle {
+    font-size: 0.72rem;
+  }
+
+  .right-panel {
+    padding: 20px 16px;
+  }
+
+  .right-panel__title {
+    font-size: 1.4rem;
+  }
+
+  .right-panel__description {
+    font-size: 0.76rem;
+  }
+
+  .form-group__input {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 0.82rem;
+  }
+
+  .btn-signin {
+    height: 42px;
+    font-size: 0.84rem;
+  }
+
+  .btn-google {
+    height: 40px;
+    font-size: 0.82rem;
+  }
+}
