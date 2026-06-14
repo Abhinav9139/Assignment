@@ -135,10 +135,10 @@ body {
 /* The transparent cutout window that forms the frame */
 .left-panel__window {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
   border-radius: var(--radius-panel);
   box-shadow: 0 0 0 9999px var(--color-white);
   z-index: 0;
@@ -161,10 +161,10 @@ body {
 /* Dark translucent overlay */
 .left-panel__glass-overlay {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
   border-radius: var(--radius-panel);
   z-index: 1;
   background: linear-gradient(
